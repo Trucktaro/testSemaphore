@@ -27,6 +27,15 @@ jobs:
           set -eu
           git config user.email "automation.localitde@zalaris.com"
           git config user.name github-bot
-          git remote add az \
-            "https://bob:${AZ_PAT}@dev.azure.com/zalaris/Zalaris%20IT%20Infrastructure/_git/Zalaris%20IT%20Infra%20-%20Local%20IT%20-%20Automation"
-            git push az HEAD:main --follow-tags
+
+          ORG="zalaris"
+          PROJECT="Zalaris IT Infrastructure"
+          REPO="Zalaris IT Infra - Local IT - Automation"
+
+          proj_enc=$(printf '%s' "$PROJECT" | jq -sRr @uri)
+          repo_enc=$(printf '%s' "$REPO" | jq -sRr @uri)
+
+          REMOTE_URL="https://anything:$(AZ_PAT)@dev.azure.com/${ORG}/${proj_enc}/_git/${repo_enc}"
+          
+          git remote add az "$REMOTE_URL" || git remote set-url az "$REMOTE_URL"
+          git push az HEAD:main --follow-tags
