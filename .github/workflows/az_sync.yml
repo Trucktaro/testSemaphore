@@ -22,6 +22,5 @@ jobs:
           REPO: ${{ secrets.REPO }}
           # USER: ${{ secrets.USER }}
 
-        run: |
-          .github/scripts/azure-push.sh
+        run: bash .github/scripts/azure-push.sh
 
