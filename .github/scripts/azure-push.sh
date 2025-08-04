@@ -5,7 +5,7 @@ set -euox pipefail
 # $PAT_DOPS, $ORG, $PROJ, $REPO
 
 # PATH inside the repo
-TARGET_PATH="/raw-ip-list.txt"
+TARGET_PATH="raw-ip-list.txt"
 
 # Local file to push
 SOURCE_FILE="./raw-ip-list.txt"
