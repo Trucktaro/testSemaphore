@@ -1,0 +1,31 @@
+name: Mirror list to Azure Repos
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 1. Check out the repo
+      - uses: actions/checkout@v4
+
+      # 2. Wrap raw list to blacklist.json
+      - name: Build JSON
+        run: |
+          jq -R -s 'split("\n")[:-1] | { blacklist: . }' \
+              raw-ip-list.txt > blacklist.json
+          git add blacklist.json
+          git commit -m "Auto-generate blacklist.json" || echo "no change"
+
+      # 3. Push to Repo
+      - name: Push to Repo
+        env:
+          AZ_PAT: ${{ secrets.PAT_DOPS }}
+        run: |
+          git config user.email "automation.localitde@zalaris.com"
+          git config user.name github-bot
+          git remote add az \
+            "https://(echo "$AZ_PAT" | sed 's/.*/user:&/')dev.azure.com/zalaris/Zalaris%20IT%20Infrastructure/_git/Zalaris%20IT%20Infra%20-%20Local%20IT%20-%20Automation"
+            git push az HEAD:main --follow-tags
