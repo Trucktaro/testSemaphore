@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -euox pipefail
 
 # Use the env provided values:
 # $PAT_DOPS, $ORG, $PROJ, $REPO
