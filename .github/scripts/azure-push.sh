@@ -5,10 +5,10 @@ set -euo pipefail
 # $PAT_DOPS, $ORG, $PROJ, $REPO
 
 # PATH inside the repo
-TARGET_PATH="/ip-list-raw.txt"
+TARGET_PATH="/raw-ip-list.txt"
 
 # Local file to push
-SOURCE_FILE="./ip-list-raw.txt"
+SOURCE_FILE="./raw-ip-list.txt"
 
 #---Fetch latest object ID---
 # 1) Get the current head objectID
