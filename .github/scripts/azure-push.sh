@@ -12,7 +12,7 @@ SOURCE_FILE="./ip-list-raw.txt"
 
 #---Fetch latest object ID---
 # 1) Get the current head objectID
-REFS_URL="https://dev.azure.com/${ORG}/${PROJ}/_apis/git/repositories/${REPO}/refs?filter=heads/main&api-version=6.0"
+REFS_URL="https://dev.azure.com/${ORG}/${PROJECT}/_apis/git/repositories/${REPO}/refs?filter=heads/main&api-version=6.0"
 OLD_OBJECT_ID=$(curl -sS -u :${AZ_PAT} "${REFS_URL}" \
   | jq -r '.value[0].objectId')
 
