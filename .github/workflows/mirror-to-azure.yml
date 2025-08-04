@@ -34,6 +34,7 @@ jobs:
           git config user.name github-bot
 
           REMOTE_URL="https://$USER:$AZ_PAT@dev.azure.com/$ORG/$PROJECT/_git/$REPO"
+          echo ">>> REMOTE_URL='${REMOTE_URL}'"
           
           git remote add az "$REMOTE_URL" || git remote set-url az "$REMOTE_URL"
           git push az HEAD:main --follow-tags
