@@ -24,8 +24,8 @@ jobs:
         env:
           AZ_PAT: ${{ secrets.PAT_DOPS }}
           ORG: ${{ secrets.ORG }}
-          PROJECT: ${{ secrets.proj }}
-          REPO: ${{ secrets.repo }}
+          PROJECT: ${{ secrets.PROJ }}
+          REPO: ${{ secrets.REPO }}
           
         run: |
           set -eu
