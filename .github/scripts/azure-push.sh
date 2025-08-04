@@ -21,7 +21,7 @@ OLD_OBJECT_ID=$(curl -sS -u :${AZ_PAT} "${REFS_URL}" \
 # Read and JSON-escape the file content
 FILE_CONTENT=$(jq -Rs . "${SOURCE_FILE}")
 # Build push payload
-read -r -d '' BODY <<EOF
+BODY=$(cat <<EOF
 {
   "refUpdates": [
     {
@@ -31,7 +31,7 @@ read -r -d '' BODY <<EOF
   ],
   "commits": [
     {
-      "comment": "🔄 Auto-update blacklist.json via REST API",
+      "comment": "🔄 Auto-update ${SOURCE_FILE} via REST API",
       "changes": [
         {
           "changeType": "edit",
@@ -46,6 +46,7 @@ read -r -d '' BODY <<EOF
   ]
 }
 EOF
+)
 
 # 5) Push via the REST API
 PUSH_URL="https://dev.azure.com/${ORG}/${PROJECT}/_apis/git/repositories/${REPO}/pushes?api-version=6.0"
