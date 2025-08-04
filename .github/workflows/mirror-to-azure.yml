@@ -24,8 +24,9 @@ jobs:
         env:
           AZ_PAT: ${{ secrets.PAT_DOPS }}
         run: |
+          set -eu
           git config user.email "automation.localitde@zalaris.com"
           git config user.name github-bot
           git remote add az \
-            "https://(echo "$AZ_PAT" | sed 's/.*/user:&/')dev.azure.com/zalaris/Zalaris%20IT%20Infrastructure/_git/Zalaris%20IT%20Infra%20-%20Local%20IT%20-%20Automation"
+            "https://bob:${AZ_PAT}@dev.azure.com/zalaris/Zalaris%20IT%20Infrastructure/_git/Zalaris%20IT%20Infra%20-%20Local%20IT%20-%20Automation"
             git push az HEAD:main --follow-tags
