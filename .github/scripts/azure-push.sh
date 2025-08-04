@@ -25,7 +25,7 @@ read -r -d '' BODY <<EOF
 {
   "refUpdates": [
     {
-      "name": "refs/heads/${TARGET_BRANCH}",
+      "name": "refs/heads/main",
       "oldObjectId": "${OLD_OBJECT_ID}"
     }
   ],
