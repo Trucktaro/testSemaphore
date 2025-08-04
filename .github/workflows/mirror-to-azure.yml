@@ -23,19 +23,16 @@ jobs:
       - name: Push to Repo
         env:
           AZ_PAT: ${{ secrets.PAT_DOPS }}
+          ORG: ${{ secrets.ORG }}
+          PROJECT: ${{ secrets.proj }}
+          REPO: ${{ secrets.repo }}
+          
         run: |
           set -eu
           git config user.email "automation.localitde@zalaris.com"
           git config user.name github-bot
 
-          ORG="zalaris"
-          PROJECT="Zalaris IT Infrastructure"
-          REPO="Zalaris IT Infra - Local IT - Automation"
-
-          proj_enc=$(printf '%s' "$PROJECT" | jq -sRr @uri)
-          repo_enc=$(printf '%s' "$REPO" | jq -sRr @uri)
-
-          REMOTE_URL="https://anything:$(AZ_PAT)@dev.azure.com/${ORG}/${proj_enc}/_git/${repo_enc}"
+          REMOTE_URL="https://anything:$(AZ_PAT)@dev.azure.com/${ORG}/${PROJECT}/_git/${REPO}"
           
           git remote add az "$REMOTE_URL" || git remote set-url az "$REMOTE_URL"
           git push az HEAD:main --follow-tags
