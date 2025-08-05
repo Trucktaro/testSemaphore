@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-set -euox pipefail
+# Add x to -euo when debugging
+set -euo pipefail
 
 # Use the env provided values:
-# $PAT_DOPS, $ORG, $PROJ, $REPO
+# $PAT_DOPS, $ORG, $PROJECT, $REPO
 
 # PATH inside the repo
 TARGET_PATH="raw-ip-list.txt"
